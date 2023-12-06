@@ -1,15 +1,18 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Ingredient {
+export class RecipeIngredients {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
-    name: string;
+    recipeId: string;
 
     @Column()
-    unit: string;
+    ingredientId: string;
+
+    @Column()
+    quantity: number;
 
     @Column()
     created_at: Date;

@@ -8,7 +8,7 @@ export class RecipeCredentialsDto {
     recipeImage: string;
 
     @IsArray()
-    ingredients: Ingredient[]
+    ingredients: Ingredient[];
 
     @IsString()
     instructions: string;
@@ -18,4 +18,7 @@ export class RecipeCredentialsDto {
 
     @IsBoolean()
     isPublic: boolean;
+
+    @IsString()
+    authorId: string;
 }

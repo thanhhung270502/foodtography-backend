@@ -1,11 +1,6 @@
 import { RecipeCredentialsDto } from './dto/recipe-credentials.dto';
 import { Recipe } from './recipe.entity';
-import {
-    Injectable,
-    NotFoundException,
-    ConflictException,
-    InternalServerErrorException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, ConflictException, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ResponseObject } from 'src/response/responseObject';
@@ -16,7 +11,7 @@ export class RecipeService {
     constructor(
         @InjectRepository(Recipe)
         private recipesRepository: Repository<Recipe>,
-    ) { }
+    ) {}
 
     async getAllRecipes(): Promise<Recipe[]> {
         const allRecipes = await this.recipesRepository.find();
@@ -27,7 +22,8 @@ export class RecipeService {
     }
 
     async addRecipe(recipeCredentialsDto: RecipeCredentialsDto): Promise<void> {
-        const { recipeName, recipeImage, ingredients, instructions, authorNote, isPublic } = recipeCredentialsDto;
+        const { recipeName, recipeImage, ingredients, instructions, authorNote, isPublic, authorId } =
+            recipeCredentialsDto;
 
         const recipe = this.recipesRepository.create({
             recipeName,
@@ -35,7 +31,8 @@ export class RecipeService {
             ingredients,
             instructions,
             authorNote,
-            isPublic
+            isPublic,
+            authorId,
         });
 
         try {
@@ -74,19 +71,28 @@ export class RecipeService {
             throw new NotFoundException(`Recipe with id ${recipe_id} not found`);
         }
 
+        var { recipeName, recipeImage, ingredients, instructions, authorNote, isPublic } = info;
+
+        if (!recipeName) recipeName = recipe.recipeName;
+        if (!recipeImage) recipeImage = recipe.recipeImage;
+        if (!ingredients) ingredients = recipe.ingredients;
+        if (!instructions) instructions = recipe.instructions;
+        if (!authorNote) authorNote = recipe.authorNote;
+        if (!isPublic) isPublic = recipe.isPublic;
+
         const newRecipe = await this.recipesRepository.update(
             { id: recipe_id },
             {
-                recipeName: info.recipeName,
-                recipeImage: info.recipeImage,
-                ingredients: info.ingredients,
-                instructions: info.instructions,
-                authorNote: info.authorNote,
-                isPublic: info.isPublic,
+                recipeName,
+                recipeImage,
+                ingredients,
+                instructions,
+                authorNote,
+                isPublic,
             },
         );
 
-        return new ResponseObject(200, 'Update recipe successfully', newRecipe);
+        return new ResponseObject(200, 'Update recipe successfully', info);
     }
 
     async delete(recipe_id: string): Promise<ResponseObject> {
@@ -104,7 +110,12 @@ export class RecipeService {
         return new ResponseObject(200, 'Delete recipe successfully', {});
     }
 
-    async updateOfUser(recipe_id: string, status: string, offset: number, itemToUpdate: ItemToUpdate): Promise<ResponseObject> {
+    async updateOfUser(
+        recipe_id: string,
+        status: string,
+        offset: number,
+        itemToUpdate: ItemToUpdate,
+    ): Promise<ResponseObject> {
         const recipe = await this.recipesRepository.findOne({
             where: {
                 id: recipe_id,

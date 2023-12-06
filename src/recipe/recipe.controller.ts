@@ -7,7 +7,7 @@ import { ItemToUpdate } from './itemToUpdate.entity';
 
 @Controller('recipes')
 export class RecipeController {
-    constructor(private recipeService: RecipeService) { }
+    constructor(private recipeService: RecipeService) {}
 
     @Get('/')
     getAllRecipes(): Promise<Recipe[]> {
@@ -34,8 +34,13 @@ export class RecipeController {
         return this.recipeService.delete(id);
     }
 
-    @Put('/:id/share')
-    updateOfUser(@Param('id') id: string, @Query('status') status: string, @Query('offset') offset: number, @Query('itemToUpdate') itemToUpdate: ItemToUpdate): Promise<ResponseObject> {
-        return this.recipeService.updateOfUser(id, status, offset, itemToUpdate);
-    }
+    // @Put('/:id/share')
+    // updateOfUser(
+    //     @Param('id') id: string,
+    //     @Query('status') status: string,
+    //     @Query('offset') offset: number,
+    //     @Query('itemToUpdate') itemToUpdate: ItemToUpdate,
+    // ): Promise<ResponseObject> {
+    //     return this.recipeService.updateOfUser(id, status, offset, itemToUpdate);
+    // }
 }

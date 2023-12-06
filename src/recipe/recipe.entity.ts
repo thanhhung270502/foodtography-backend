@@ -13,7 +13,7 @@ export class Recipe {
     recipeImage: string;
 
     @Column({ type: 'json', default: [] })
-    ingredients: Ingredient[]
+    ingredients: Ingredient[];
 
     @Column()
     instructions: string;
@@ -23,4 +23,7 @@ export class Recipe {
 
     @Column()
     isPublic: boolean;
+
+    @Column()
+    authorId: string;
 }

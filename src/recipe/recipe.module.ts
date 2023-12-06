@@ -4,9 +4,7 @@ import { RecipeService } from './recipe.service';
 import { Recipe } from './recipe.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
-    imports: [
-        TypeOrmModule.forFeature([Recipe])
-    ],
+    imports: [TypeOrmModule.forFeature([Recipe])],
     controllers: [RecipeController],
     providers: [RecipeService],
     exports: [RecipeService],
