@@ -1,0 +1,66 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/auth": {
+            "post": {
+                "operationId": "AuthController_signUp",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": { "schema": { "$ref": "#/components/schemas/AuthCredentialsDto" } }
+                    }
+                },
+                "responses": { "201": { "description": "" } }
+            },
+            "get": {
+                "operationId": "AuthController_getAllUsers",
+                "parameters": [],
+                "responses": { "200": { "description": "" } }
+            }
+        },
+        "/auth/signin": {
+            "post": {
+                "operationId": "AuthController_signIn",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": { "schema": { "$ref": "#/components/schemas/AuthCredentialsDto" } }
+                    }
+                },
+                "responses": { "201": { "description": "" } }
+            }
+        },
+        "/auth/{id}": {
+            "put": {
+                "operationId": "AuthController_update",
+                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } }
+                },
+                "responses": { "200": { "description": "" } }
+            },
+            "get": {
+                "operationId": "AuthController_getUserByID",
+                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+                "responses": { "200": { "description": "" } }
+            },
+            "delete": {
+                "operationId": "AuthController_delete",
+                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+                "responses": { "200": { "description": "" } }
+            }
+        }
+    },
+    "info": { "title": "Title", "description": "description", "version": "1.0", "contact": {} },
+    "tags": [],
+    "servers": [],
+    "components": {
+        "schemas": {
+            "AuthCredentialsDto": { "type": "object", "properties": {} },
+            "User": { "type": "object", "properties": {} }
+        }
+    }
+}
