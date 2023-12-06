@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\auth",
+    "\\src\\auth\\dto",
+    "\\src\\ingredient",
+    "\\src\\recipe",
+    "\\src\\recipe\\dto",
+    "\\src\\response"
+  ],
+  "SelectedNode": "\\src\\app.module.ts",
+  "PreviewInSolutionExplorer": false
+}
