@@ -11,7 +11,7 @@ async function bootstrap() {
     const options = new DocumentBuilder().setTitle('Title').setDescription('description').setVersion('1.0').build();
     const document = SwaggerModule.createDocument(app, options);
 
-    fs.writeFileSync('./swagger-spec.json', JSON.stringify(document));
+    fs.writeFileSync('/tmp/swagger-spec.json', JSON.stringify(document));
     SwaggerModule.setup('/auth', app, document);
     await app.listen(3000);
 }

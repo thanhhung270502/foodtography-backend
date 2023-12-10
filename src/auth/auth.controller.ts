@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { User } from './user.entity';
-import { ResponseObject } from 'src/response/responseObject';
+import { ResponseObject } from '../response/responseObject';
 
 @Controller('auth')
 export class AuthController {

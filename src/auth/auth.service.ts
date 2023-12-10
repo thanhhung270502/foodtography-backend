@@ -12,7 +12,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
-import { ResponseObject } from 'src/response/responseObject';
+import { ResponseObject } from '../response/responseObject';
 
 @Injectable()
 export class AuthService {
