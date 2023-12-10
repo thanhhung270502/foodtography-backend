@@ -8,11 +8,12 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule, { cors: true });
     app.useGlobalPipes(new ValidationPipe());
     process.env.TZ = 'ETC/Universal';
-    const options = new DocumentBuilder().setTitle('Title').setDescription('description').setVersion('1.0').build();
-    const document = SwaggerModule.createDocument(app, options);
+    app.enableCors();
+    // const options = new DocumentBuilder().setTitle('Title').setDescription('description').setVersion('1.0').build();
+    // const document = SwaggerModule.createDocument(app, options);
 
-    fs.writeFileSync('/tmp/swagger-spec.json', JSON.stringify(document));
-    SwaggerModule.setup('/auth', app, document);
+    // fs.writeFileSync('/tmp/swagger-spec.json', JSON.stringify(document));
+    // SwaggerModule.setup('/auth', app, document);
     await app.listen(3000);
 }
 bootstrap();

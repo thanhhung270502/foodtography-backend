@@ -52,6 +52,45 @@
                 "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
                 "responses": { "200": { "description": "" } }
             }
+        },
+        "/recipes": {
+            "get": {
+                "operationId": "RecipeController_getAllRecipes",
+                "parameters": [],
+                "responses": { "200": { "description": "" } }
+            },
+            "post": {
+                "operationId": "RecipeController_addRecipe",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": { "schema": { "$ref": "#/components/schemas/RecipeCredentialsDto" } }
+                    }
+                },
+                "responses": { "201": { "description": "" } }
+            }
+        },
+        "/recipes/{id}": {
+            "get": {
+                "operationId": "RecipeController_getRecipeByID",
+                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+                "responses": { "200": { "description": "" } }
+            },
+            "put": {
+                "operationId": "RecipeController_update",
+                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+                "requestBody": {
+                    "required": true,
+                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Recipe" } } }
+                },
+                "responses": { "200": { "description": "" } }
+            },
+            "delete": {
+                "operationId": "RecipeController_delete",
+                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+                "responses": { "200": { "description": "" } }
+            }
         }
     },
     "info": { "title": "Title", "description": "description", "version": "1.0", "contact": {} },
@@ -60,7 +99,9 @@
     "components": {
         "schemas": {
             "AuthCredentialsDto": { "type": "object", "properties": {} },
-            "User": { "type": "object", "properties": {} }
+            "User": { "type": "object", "properties": {} },
+            "RecipeCredentialsDto": { "type": "object", "properties": {} },
+            "Recipe": { "type": "object", "properties": {} }
         }
     }
 }
