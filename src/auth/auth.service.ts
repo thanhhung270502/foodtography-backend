@@ -56,7 +56,8 @@ export class AuthService {
         } catch (error) {
             if (error.code === '23505') {
                 // duplicate username
-                throw new ConflictException('Username already exists');
+                // throw new ConflictException('Username already exists');
+                return new ResponseObject(409, 'Username already exists', {});
             } else {
                 throw new InternalServerErrorException();
             }
