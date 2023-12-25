@@ -9,7 +9,7 @@ export class AuthController {
     constructor(private authService: AuthService) {}
 
     @Post('/')
-    signUp(@Body() authCredentialsDto: AuthCredentialsDto): Promise<void> {
+    signUp(@Body() authCredentialsDto: AuthCredentialsDto): Promise<ResponseObject> {
         return this.authService.signUp(authCredentialsDto);
     }
 

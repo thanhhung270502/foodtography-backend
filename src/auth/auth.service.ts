@@ -13,6 +13,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
 import { ResponseObject } from '../response/responseObject';
+import { Logger } from '@nestjs/common';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +23,7 @@ export class AuthService {
         private jwtService: JwtService,
     ) {}
 
-    async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
+    async signUp(authCredentialsDto: AuthCredentialsDto): Promise<ResponseObject> {
         const { email, password, name, avatar } = authCredentialsDto;
 
         // hash
@@ -40,7 +41,18 @@ export class AuthService {
         });
 
         try {
-            await this.usersRepository.save(user);
+            const saveUser = await this.usersRepository.save(user);
+            // console.log(saveUser);
+            Logger.log(saveUser);
+            const payload: JwtPayload = { email };
+            const accessToken: string = this.jwtService.sign(payload);
+            return new ResponseObject(200, 'Signup successfully', {
+                id: saveUser.id,
+                email: saveUser.email,
+                name: saveUser.name,
+                avatar: saveUser.avatar,
+                accessToken: accessToken,
+            });
         } catch (error) {
             if (error.code === '23505') {
                 // duplicate username
