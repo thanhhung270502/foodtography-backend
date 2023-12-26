@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { RecipeModule } from './recipe/recipe.module';
 import { IngredientModule } from './ingredient/ingredient.module';
 import { RecipeIngredientsModule } from './recipeIngredients/recipeIngredients.module';
+import { MealModule } from './meal/meal.module';
 
 console.log(process.env.POSTGRES_HOST);
 
@@ -14,6 +15,7 @@ console.log(process.env.POSTGRES_HOST);
         RecipeModule,
         IngredientModule,
         RecipeIngredientsModule,
+        MealModule,
         ConfigModule.forRoot({
             envFilePath: ['.env.development.local', '.env.development', '.env'],
         }),

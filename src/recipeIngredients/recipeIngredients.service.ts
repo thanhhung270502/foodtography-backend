@@ -17,4 +17,12 @@ export class RecipeIngredientsService {
         @InjectRepository(RecipeIngredients)
         private recipeIngredientsRepository: Repository<RecipeIngredients>,
     ) {}
+
+    async getAllRecipeIngredients(): Promise<RecipeIngredients[]> {
+        const allRecipeIngredients = await this.recipeIngredientsRepository.find();
+
+        if (!allRecipeIngredients) throw new NotFoundException(`Ingredients not found`);
+
+        return allRecipeIngredients;
+    }
 }

@@ -15,7 +15,7 @@ export class RecipeController {
     }
 
     @Post('/')
-    addRecipe(@Body() recipeCredentialsDto: RecipeCredentialsDto): Promise<void> {
+    addRecipe(@Body() recipeCredentialsDto: RecipeCredentialsDto): Promise<ResponseObject> {
         return this.recipeService.addRecipe(recipeCredentialsDto);
     }
 

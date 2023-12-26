@@ -1,11 +1,11 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Column, PrimaryGeneratedColumn } from 'typeorm';
 
 export class ItemToUpdate {
     @PrimaryGeneratedColumn('uuid')
     recipe_id: string;
 
     @Column()
-    recipeName: string;
+    name: string;
 
     @Column()
     recipeInfo: string;

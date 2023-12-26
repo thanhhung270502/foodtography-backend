@@ -1,27 +1,19 @@
+import { Recipe } from 'src/recipe/recipe.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Recipe {
+export class Meal {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
-    name: string;
+    userId: string;
+
+    @Column({ type: 'json', default: [] })
+    recipes: Recipe[];
 
     @Column()
-    image: string;
-
-    @Column()
-    instructions: string;
-
-    @Column()
-    authorNote: string;
-
-    @Column()
-    isPublic: boolean;
-
-    @Column()
-    authorId: string;
+    time: Date;
 
     @Column()
     created_at: Date;

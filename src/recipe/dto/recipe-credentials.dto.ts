@@ -2,13 +2,16 @@ import { IsString, IsArray, IsBoolean } from 'class-validator';
 import { Ingredient } from '../../ingredient/ingredient.entity';
 export class RecipeCredentialsDto {
     @IsString()
-    recipeName: string;
+    name: string;
 
     @IsString()
-    recipeImage: string;
+    image: string;
 
     @IsArray()
-    ingredients: Ingredient[];
+    ingredients: string[];
+
+    @IsArray()
+    quantities: number[];
 
     @IsString()
     instructions: string;

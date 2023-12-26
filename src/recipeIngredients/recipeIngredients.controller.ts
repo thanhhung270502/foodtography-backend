@@ -4,7 +4,12 @@ import { RecipeIngredientsCredentialsDto } from './dto/recipeIngredients-credent
 import { RecipeIngredients } from './recipeIngredients.entity';
 import { ResponseObject } from 'src/response/responseObject';
 
-@Controller('auth')
+@Controller('recipe-ingredients')
 export class RecipeIngredientsController {
-    constructor(private ingredientService: RecipeIngredientsService) {}
+    constructor(private recipeIngredientsService: RecipeIngredientsService) {}
+
+    @Get('/')
+    index(): Promise<RecipeIngredients[]> {
+        return this.recipeIngredientsService.getAllRecipeIngredients();
+    }
 }

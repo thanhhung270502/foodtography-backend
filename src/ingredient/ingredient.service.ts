@@ -17,4 +17,29 @@ export class IngredientService {
         @InjectRepository(Ingredient)
         private ingredientsRepository: Repository<Ingredient>,
     ) {}
+
+    async getAllIngredients(): Promise<Ingredient[]> {
+        const allIngredients = await this.ingredientsRepository.find();
+
+        if (!allIngredients) throw new NotFoundException(`Ingredients not found`);
+
+        return allIngredients;
+    }
+
+    async addNewIngredient(ingredientCredentialsDto: IngredientCredentialsDto): Promise<ResponseObject> {
+        const ingredient = this.ingredientsRepository.create({
+            name: ingredientCredentialsDto.name,
+            unit: ingredientCredentialsDto.unit,
+            created_at: new Date(),
+            updated_at: new Date(),
+        });
+
+        try {
+            const savedIngredient = await this.ingredientsRepository.save(ingredient);
+
+            return new ResponseObject(200, 'Created successfully', { savedIngredient });
+        } catch (err) {
+            return new ResponseObject(500, 'Internal Server Error', err);
+        }
+    }
 }

@@ -5,12 +5,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ResponseObject } from 'src/response/responseObject';
 import { ItemToUpdate } from './itemToUpdate.entity';
+import { RecipeIngredients } from 'src/recipeIngredients/recipeIngredients.entity';
 
 @Injectable()
 export class RecipeService {
     constructor(
         @InjectRepository(Recipe)
         private recipesRepository: Repository<Recipe>,
+
+        @InjectRepository(RecipeIngredients)
+        private recipeIngredientsRepository: Repository<RecipeIngredients>,
     ) {}
 
     async getAllRecipes(): Promise<Recipe[]> {
@@ -21,22 +25,40 @@ export class RecipeService {
         return allRecipes;
     }
 
-    async addRecipe(recipeCredentialsDto: RecipeCredentialsDto): Promise<void> {
-        const { recipeName, recipeImage, ingredients, instructions, authorNote, isPublic, authorId } =
+    async addRecipe(recipeCredentialsDto: RecipeCredentialsDto): Promise<ResponseObject> {
+        const { name, image, instructions, authorNote, isPublic, authorId, ingredients, quantities } =
             recipeCredentialsDto;
 
         const recipe = this.recipesRepository.create({
-            recipeName,
-            recipeImage,
-            ingredients,
+            name,
+            image,
             instructions,
             authorNote,
             isPublic,
             authorId,
+            created_at: new Date(),
+            updated_at: new Date(),
         });
 
         try {
-            await this.recipesRepository.save(recipe);
+            const saveRecipe = await this.recipesRepository.save(recipe);
+
+            for (let i = 0; i < ingredients.length; i++) {
+                let recipeIngredient = this.recipeIngredientsRepository.create({
+                    recipeId: saveRecipe.id,
+                    ingredientId: ingredients[i],
+                    quantity: quantities[i],
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                });
+
+                try {
+                    let saveRecipeIngredient = await this.recipeIngredientsRepository.save(recipeIngredient);
+                } catch (error) {
+                    throw new InternalServerErrorException();
+                }
+            }
+            return new ResponseObject(200, 'Create successfully', {});
         } catch (error) {
             if (error.code === '23505') {
                 throw new ConflictException('Recipe already exists');
@@ -71,11 +93,10 @@ export class RecipeService {
             throw new NotFoundException(`Recipe with id ${recipe_id} not found`);
         }
 
-        var { recipeName, recipeImage, ingredients, instructions, authorNote, isPublic } = info;
+        var { name, image, instructions, authorNote, isPublic } = info;
 
-        if (!recipeName) recipeName = recipe.recipeName;
-        if (!recipeImage) recipeImage = recipe.recipeImage;
-        if (!ingredients) ingredients = recipe.ingredients;
+        if (!name) name = recipe.name;
+        if (!image) image = recipe.image;
         if (!instructions) instructions = recipe.instructions;
         if (!authorNote) authorNote = recipe.authorNote;
         if (!isPublic) isPublic = recipe.isPublic;
@@ -83,12 +104,12 @@ export class RecipeService {
         const newRecipe = await this.recipesRepository.update(
             { id: recipe_id },
             {
-                recipeName,
-                recipeImage,
-                ingredients,
+                name,
+                image,
                 instructions,
                 authorNote,
                 isPublic,
+                updated_at: new Date(),
             },
         );
 
@@ -129,7 +150,7 @@ export class RecipeService {
         const newRecipe = await this.recipesRepository.update(
             { id: recipe_id },
             {
-                recipeName: itemToUpdate.recipeName,
+                name: itemToUpdate.name,
                 // Chua hieu phan nay
             },
         );
