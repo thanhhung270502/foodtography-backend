@@ -27,7 +27,8 @@ const pool = require('./pool');
 
 const createRecipes = async () => {
     try {
-        await pool.query('drop table if exists recipe cascade');
+        await pool.query('drop table if exists meal cascade');
+        await pool.query('drop table if exists meal_recipes cascade');
     } catch (err) {
         console.log(err);
         process.exit(1);

@@ -12,4 +12,9 @@ export class RecipeIngredientsController {
     index(): Promise<RecipeIngredients[]> {
         return this.recipeIngredientsService.getAllRecipeIngredients();
     }
+
+    // @Post('/')
+    // create(@Body() body: any): Promise<ResponseObject> {
+    //     return;
+    // }
 }

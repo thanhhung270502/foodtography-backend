@@ -16,8 +16,8 @@ export class MealController {
     }
 
     @Post('/')
-    create(@Body() info: Object): Promise<ResponseObject> {
-        Logger.log(info);
-        return this.mealService.create(info);
+    create(@Body() body: any): Promise<ResponseObject> {
+        Logger.log(body);
+        return this.mealService.create(body);
     }
 }
