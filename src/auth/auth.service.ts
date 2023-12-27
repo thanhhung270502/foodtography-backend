@@ -73,7 +73,9 @@ export class AuthService {
             },
         });
 
-        if (user && (await bcrypt.compare(password, user.password))) {
+        if (!user) {
+            return new ResponseObject(404, 'This username is not exist', {});
+        } else if (user && (await bcrypt.compare(password, user.password))) {
             const payload: JwtPayload = { email };
             const accessToken: string = this.jwtService.sign(payload);
             return new ResponseObject(200, 'Login successfully', {
@@ -84,7 +86,8 @@ export class AuthService {
                 accessToken: accessToken,
             });
         } else {
-            throw new UnauthorizedException('Please check your login credentials');
+            // throw new UnauthorizedException('Please check your login credentials');
+            return new ResponseObject(401, 'This password is wrong', {});
         }
     }
 
