@@ -85,4 +85,9 @@ export class MealService {
             throw new InternalServerErrorException();
         }
     }
+
+    async getAllMeals(): Promise<Meal[]> {
+        const meal = await this.mealsRepository.find();
+        return meal;
+    }
 }

@@ -15,6 +15,11 @@ export class MealController {
         return this.mealService.getAllMealsByWeek(userId, time);
     }
 
+    @Get('/')
+    index(): Promise<Meal[]> {
+        return this.mealService.getAllMeals();
+    }
+
     @Post('/')
     create(@Body() body: any): Promise<ResponseObject> {
         Logger.log(body);
