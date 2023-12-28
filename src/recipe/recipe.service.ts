@@ -42,7 +42,6 @@ export class RecipeService {
 
         try {
             const saveRecipe = await this.recipesRepository.save(recipe);
-
             for (let i = 0; i < ingredients.length; i++) {
                 let recipeIngredient = this.recipeIngredientsRepository.create({
                     recipeId: saveRecipe.id,

@@ -13,11 +13,11 @@ console.log(process.env.POSTGRES_HOST);
 @Module({
     imports: [
         AuthModule,
+        MealModule,
         RecipeModule,
+        MealRecipesModule,
         IngredientModule,
         RecipeIngredientsModule,
-        MealModule,
-        MealRecipesModule,
         ConfigModule.forRoot({
             envFilePath: ['.env.development.local', '.env.development', '.env'],
         }),

@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Meal } from 'src/meal/meal.entity';
+import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -25,4 +26,7 @@ export class User {
 
     @Column()
     updated_at: Date;
+
+    @OneToMany(() => Meal, (meal) => meal.user)
+    meals: Meal[];
 }

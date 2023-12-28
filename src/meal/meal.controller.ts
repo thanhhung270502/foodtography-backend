@@ -17,12 +17,18 @@ export class MealController {
 
     @Get('/')
     index(): Promise<Meal[]> {
-        return this.mealService.getAllMeals();
+        // return this.mealService.getAllMeals();
+        return this.mealService.findAll();
     }
 
     @Post('/')
-    create(@Body() body: any): Promise<ResponseObject> {
-        Logger.log(body);
+    create(@Body() body: MealCredentialsDto): Promise<Meal> {
         return this.mealService.create(body);
     }
+
+    // @Post('/')
+    // create(@Body() body: any): Promise<ResponseObject> {
+    //     Logger.log(body);
+    //     return this.mealService.create(body);
+    // }
 }
