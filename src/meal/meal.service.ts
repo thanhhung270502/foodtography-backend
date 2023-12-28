@@ -46,6 +46,7 @@ export class MealService {
                     mealId: meals[i].id,
                 },
             });
+
             array.push({
                 meal: meals[i],
                 mealRecipes,

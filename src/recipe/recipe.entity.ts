@@ -20,7 +20,7 @@ export class Recipe {
     @Column()
     isPublic: boolean;
 
-    @Column()
+    @Column('uuid')
     authorId: string;
 
     @Column()

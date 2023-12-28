@@ -5,10 +5,10 @@ export class RecipeIngredients {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column()
+    @Column('uuid')
     recipeId: string;
 
-    @Column()
+    @Column('uuid')
     ingredientId: string;
 
     @Column()

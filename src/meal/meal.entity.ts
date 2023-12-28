@@ -6,7 +6,7 @@ export class Meal {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column()
+    @Column('uuid')
     userId: string;
 
     @Column()
