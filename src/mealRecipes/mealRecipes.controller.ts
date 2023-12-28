@@ -9,18 +9,18 @@ import { MealCredentialsDto } from 'src/meal/dto/meal-credentials.dto';
 export class MealRecipesController {
     constructor(private mealRecipesService: MealRecipesService) {}
 
-    @Get('/')
-    index(): Promise<MealRecipes[]> {
-        return this.mealRecipesService.getAllMealRecipes();
+    // @Get('/')
+    // index(): Promise<MealRecipes[]> {
+    //     return this.mealRecipesService.getAllMealRecipes();
+    // }
+
+    @Post('/')
+    create(@Body() body: MealRecipesCredentialsDto): Promise<ResponseObject> {
+        return this.mealRecipesService.create(body);
     }
 
-    // @Post('/')
-    // create(@Body() body: MealRecipesCredentialsDto): Promise<ResponseObject> {
-    //     return this.mealRecipesService.create(body);
-    // }
-
-    // @Delete('/')
-    // delete(@Param('id') id: string): Promise<ResponseObject> {
-    //     return this.mealRecipesService.delete(id);
-    // }
+    @Delete('/')
+    delete(@Param('id') id: string): Promise<ResponseObject> {
+        return this.mealRecipesService.delete(id);
+    }
 }

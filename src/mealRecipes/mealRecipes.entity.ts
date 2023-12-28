@@ -7,11 +7,11 @@ export class MealRecipes {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    // @Column('uuid')
-    // mealId: string;
+    @PrimaryColumn('uuid')
+    mealId: string;
 
-    // @Column('uuid')
-    // recipeId: string;
+    @PrimaryColumn('uuid')
+    recipeId: string;
 
     // @Column()
     // created_at: Date;

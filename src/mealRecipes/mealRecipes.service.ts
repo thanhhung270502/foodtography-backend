@@ -23,86 +23,84 @@ export class MealRecipesService {
         private mealsRepository: Repository<Meal>,
     ) {}
 
-    async getAllMealRecipes(): Promise<MealRecipes[]> {
-        const allMealRecipes = await this.mealRecipesRepository.find();
+    // async getAllMealRecipes(): Promise<MealRecipes[]> {
+    //     const allMealRecipes = await this.mealRecipesRepository.find();
 
-        if (!allMealRecipes) throw new NotFoundException(`Ingredients not found`);
+    //     if (!allMealRecipes) throw new NotFoundException(`Ingredients not found`);
 
-        return allMealRecipes;
+    //     return allMealRecipes;
+    // }
+
+    async create(body: MealRecipesCredentialsDto): Promise<ResponseObject> {
+        let { recipeId, mealId, userId } = body;
+        Logger.log(body);
+
+        if (!mealId) {
+            const meal = this.mealsRepository.create({
+                userId,
+                time: new Date(),
+                created_at: new Date(),
+                updated_at: new Date(),
+            });
+
+            try {
+                const saveMeal = await this.mealsRepository.save(meal);
+                mealId = saveMeal.id;
+            } catch (error) {
+                throw new InternalServerErrorException();
+            }
+        } else {
+            const meal = await this.mealsRepository.findOne({
+                where: {
+                    id: mealId,
+                },
+            });
+
+            if (!meal) {
+                return new ResponseObject(404, `Meal with id ${mealId} not found`, {});
+            } else {
+                Logger.log(meal);
+            }
+        }
+
+        // Check conflict
+        const findMealRecipe = await this.mealRecipesRepository.findOne({
+            where: {
+                recipeId,
+                mealId,
+            },
+        });
+        if (findMealRecipe) {
+            return new ResponseObject(409, 'MealRecipe already exists', {});
+        }
+
+        const mealRecipe = this.mealRecipesRepository.create({
+            recipeId,
+            mealId,
+        });
+
+        Logger.log(mealRecipe);
+
+        try {
+            const saveMealRecipe = await this.mealRecipesRepository.save(mealRecipe);
+            return new ResponseObject(200, 'Create successfully', saveMealRecipe);
+        } catch (error) {
+            throw new InternalServerErrorException();
+        }
     }
 
-    // async create(body: MealRecipesCredentialsDto): Promise<ResponseObject> {
-    //     let { recipeId, mealId, userId } = body;
-    //     Logger.log(body);
+    async delete(id: string): Promise<ResponseObject> {
+        const mealRecipe = await this.mealRecipesRepository.findOne({
+            where: {
+                id,
+            },
+        });
 
-    //     if (!mealId) {
-    //         const meal = this.mealsRepository.create({
-    //             userId,
-    //             time: new Date(),
-    //             created_at: new Date(),
-    //             updated_at: new Date(),
-    //         });
+        if (!mealRecipe) {
+            return new ResponseObject(404, `Meal-recipe with id = ${id} not found`, {});
+        }
 
-    //         try {
-    //             const saveMeal = await this.mealsRepository.save(meal);
-    //             mealId = saveMeal.id;
-    //         } catch (error) {
-    //             throw new InternalServerErrorException();
-    //         }
-    //     } else {
-    //         const meal = await this.mealsRepository.findOne({
-    //             where: {
-    //                 id: mealId,
-    //             },
-    //         });
-
-    //         if (!meal) {
-    //             return new ResponseObject(404, `Meal with id ${mealId} not found`, {});
-    //         } else {
-    //             Logger.log(meal);
-    //         }
-    //     }
-
-    //     // Check conflict
-    //     const findMealRecipe = await this.mealRecipesRepository.findOne({
-    //         where: {
-    //             // recipeId,
-    //             // mealId,
-    //         },
-    //     });
-    //     if (findMealRecipe) {
-    //         return new ResponseObject(409, 'MealRecipe already exists', {});
-    //     }
-
-    //     const mealRecipe = this.mealRecipesRepository.create({
-    //         // recipeId,
-    //         // mealId,
-    //         created_at: new Date(),
-    //         updated_at: new Date(),
-    //     });
-
-    //     Logger.log(mealRecipe);
-
-    //     try {
-    //         const saveMealRecipe = await this.mealRecipesRepository.save(mealRecipe);
-    //         return new ResponseObject(200, 'Create successfully', saveMealRecipe);
-    //     } catch (error) {
-    //         throw new InternalServerErrorException();
-    //     }
-    // }
-
-    // async delete(id: string): Promise<ResponseObject> {
-    //     const mealRecipe = await this.mealRecipesRepository.findOne({
-    //         where: {
-    //             id,
-    //         },
-    //     });
-
-    //     if (!mealRecipe) {
-    //         return new ResponseObject(404, `Meal-recipe with id = ${id} not found`, {});
-    //     }
-
-    //     await this.mealRecipesRepository.delete({ id });
-    //     return new ResponseObject(200, 'Delete meal-recipe successfully', {});
-    // }
+        await this.mealRecipesRepository.delete({ id });
+        return new ResponseObject(200, 'Delete meal-recipe successfully', {});
+    }
 }

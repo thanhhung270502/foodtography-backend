@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Meal } from './meal.entity';
-import { Repository } from 'typeorm';
+import { Between, LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 import { ResponseObject } from 'src/response/responseObject';
 import { Recipe } from 'src/recipe/recipe.entity';
 import { getEndTime, getStartTime } from './meal.helper';
@@ -25,50 +25,50 @@ export class MealService {
         private mealRecipesRepository: Repository<MealRecipes>,
     ) {}
 
-    async getAllMealsByWeek(userId: string, time: string): Promise<ResponseObject> {
-        Logger.log(getStartTime(time));
+    // async getAllMealsByWeek(userId: string, time: string): Promise<ResponseObject> {
+    //     Logger.log(getStartTime(time));
 
-        const startTime = getStartTime(time);
-        const endTime = getEndTime(time);
-        const meals = await this.mealsRepository
-            .createQueryBuilder('meal')
-            .where('meal.time >= :startTime', { startTime })
-            .andWhere('meal.time <= :endTime', { endTime })
-            .andWhere('meal.userId = :userId', { userId })
-            .getMany();
+    //     const startTime = getStartTime(time);
+    //     const endTime = getEndTime(time);
+    //     const meals = await this.mealsRepository
+    //         .createQueryBuilder('meal')
+    //         .where('meal.time >= :startTime', { startTime })
+    //         .andWhere('meal.time <= :endTime', { endTime })
+    //         .andWhere('meal.userId = :userId', { userId })
+    //         .getMany();
 
-        // const meals = thi
+    //     // const meals = thi
 
-        let array = [];
-        for (let i = 0; i < meals.length; i++) {
-            // let mealRecipes = await this.mealRecipesRepository.find({
-            //     where: {
-            //         mealId: meals[i].id,
-            //     },
-            // });
+    //     let array = [];
+    //     for (let i = 0; i < meals.length; i++) {
+    //         // let mealRecipes = await this.mealRecipesRepository.find({
+    //         //     where: {
+    //         //         mealId: meals[i].id,
+    //         //     },
+    //         // });
 
-            // let recipes = await this.mealRecipesRepository
-            //     .createQueryBuilder('meal_recipes')
-            //     .leftJoinAndMapMany('recipe', 'r', 'meal_recipes.recipeId = r.id')
-            //     .leftJoinAndMapMany('meal', 'm', 'meal_recipes.mealId = m.id')
-            //     .where('meal_recipes.mealId = :mealId', { mealId: meals[i].id })
-            //     .getMany();
+    //         // let recipes = await this.mealRecipesRepository
+    //         //     .createQueryBuilder('meal_recipes')
+    //         //     .leftJoinAndMapMany('recipe', 'r', 'meal_recipes.recipeId = r.id')
+    //         //     .leftJoinAndMapMany('meal', 'm', 'meal_recipes.mealId = m.id')
+    //         //     .where('meal_recipes.mealId = :mealId', { mealId: meals[i].id })
+    //         //     .getMany();
 
-            let recipes = await this.mealsRepository
-                .createQueryBuilder('meal')
-                .leftJoinAndSelect('meal.recipes', 'recipe')
-                .where('meal_recipes.mealId = :mealId', { mealId: meals[i].id })
-                .getMany();
+    //         let recipes = await this.mealsRepository
+    //             .createQueryBuilder('meal')
+    //             .leftJoinAndSelect('meal.recipes', 'recipe')
+    //             .where('meal_recipes.mealId = :mealId', { mealId: meals[i].id })
+    //             .getMany();
 
-            array.push({
-                meal: meals[i],
-                // mealRecipes,
-                recipes,
-            });
-        }
+    //         array.push({
+    //             meal: meals[i],
+    //             // mealRecipes,
+    //             recipes,
+    //         });
+    //     }
 
-        return new ResponseObject(200, 'Found successfully', array);
-    }
+    //     return new ResponseObject(200, 'Found successfully', array);
+    // }
 
     // async create(info: any): Promise<ResponseObject> {
     //     const { userId, time, recipeIds } = info;
@@ -125,8 +125,26 @@ export class MealService {
             updated_at: new Date(),
         });
 
-        meal.recipes = dto.recipeIds.map((id) => ({ ...new Recipe(), id }));
+        // meal.recipes = recipeIds.map((id) => ({ ...new Recipe(), id }));
 
         return await this.mealsRepository.save(meal);
+    }
+
+    async getAllMealsByWeek(userId: string, time: string): Promise<ResponseObject> {
+        const startTime: Date = new Date(getStartTime(time));
+        const endTime: Date = new Date(getEndTime(time));
+
+        const meals = await this.mealsRepository.find({
+            relations: {
+                user: true,
+                recipes: true,
+            },
+            where: {
+                time: Between(startTime, endTime),
+                userId,
+            },
+        });
+
+        return new ResponseObject(200, 'Found successfully', meals);
     }
 }
