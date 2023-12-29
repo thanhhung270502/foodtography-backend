@@ -8,4 +8,6 @@ export class MealRecipesCredentialsDto {
     mealId: string;
 
     userId: string;
+
+    time: string;
 }

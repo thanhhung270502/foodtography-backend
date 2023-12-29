@@ -32,13 +32,13 @@ export class MealRecipesService {
     }
 
     async create(body: MealRecipesCredentialsDto): Promise<ResponseObject> {
-        let { recipeId, mealId, userId } = body;
+        let { recipeId, mealId, userId, time } = body;
         Logger.log(body);
 
         if (!mealId) {
             const meal = this.mealsRepository.create({
                 userId,
-                time: new Date(),
+                time: new Date(time),
                 created_at: new Date(),
                 updated_at: new Date(),
             });
