@@ -23,13 +23,13 @@ export class MealRecipesService {
         private mealsRepository: Repository<Meal>,
     ) {}
 
-    // async getAllMealRecipes(): Promise<MealRecipes[]> {
-    //     const allMealRecipes = await this.mealRecipesRepository.find();
+    async getAllMealRecipes(): Promise<MealRecipes[]> {
+        const allMealRecipes = await this.mealRecipesRepository.find();
 
-    //     if (!allMealRecipes) throw new NotFoundException(`Ingredients not found`);
+        if (!allMealRecipes) throw new NotFoundException(`Ingredients not found`);
 
-    //     return allMealRecipes;
-    // }
+        return allMealRecipes;
+    }
 
     async create(body: MealRecipesCredentialsDto): Promise<ResponseObject> {
         let { recipeId, mealId, userId } = body;

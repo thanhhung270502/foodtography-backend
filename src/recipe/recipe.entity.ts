@@ -1,5 +1,6 @@
+import { User } from 'src/auth/user.entity';
 import { Meal } from 'src/meal/meal.entity';
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('recipe')
 export class Recipe {
@@ -29,6 +30,10 @@ export class Recipe {
 
     @Column()
     updated_at: Date;
+
+    @ManyToOne(() => User, (user) => user.recipes)
+    @JoinColumn({ name: 'authorId' })
+    user: User;
 
     @ManyToMany(() => Meal, (meal) => meal.recipes)
     meals: Meal[];
