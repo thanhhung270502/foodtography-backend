@@ -50,3 +50,11 @@ export const getEndTime = (time: string) => {
         return thisTime.toISOString();
     }
 };
+
+export const getRandomRange: (start: number, end: number) => number = (start: number, end: number) => {
+    return Math.floor(Math.random() * (end - start + 1) + start);
+};
+
+export const delay = async (ms: number) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+};

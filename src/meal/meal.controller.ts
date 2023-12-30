@@ -4,6 +4,7 @@ import { MealCredentialsDto } from './dto/meal-credentials.dto';
 import { Meal } from './meal.entity';
 import { ResponseObject } from 'src/response/responseObject';
 import { Recipe } from 'src/recipe/recipe.entity';
+import { CreateMealPlanningCredentialsDto } from './dto/createPlanning-credentials.dto';
 
 @Controller('meals')
 export class MealController {
@@ -24,6 +25,11 @@ export class MealController {
     @Post('/')
     create(@Body() body: MealCredentialsDto): Promise<Meal> {
         return this.mealService.create(body);
+    }
+
+    @Post('/createPlanning')
+    createAllWeek(@Body() body: CreateMealPlanningCredentialsDto): Promise<ResponseObject> {
+        return this.mealService.createAllWeek(body);
     }
 
     // @Post('/')
