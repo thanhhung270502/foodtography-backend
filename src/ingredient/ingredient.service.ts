@@ -32,6 +32,7 @@ export class IngredientService {
             unit: ingredientCredentialsDto.unit,
             created_at: new Date(),
             updated_at: new Date(),
+            image: ingredientCredentialsDto.image,
         });
 
         try {

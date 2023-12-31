@@ -2,11 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\auth\\dto",
     "\\src\\ingredient",
-    "\\src\\recipe",
-    "\\src\\recipe\\dto"
+    "\\src\\ingredient\\dto"
   ],
-  "SelectedNode": "\\vercel.json",
+  "SelectedNode": "\\src\\ingredient\\dto\\ingredient-credentials.dto.ts",
   "PreviewInSolutionExplorer": false
 }
