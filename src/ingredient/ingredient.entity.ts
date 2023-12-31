@@ -9,6 +9,9 @@ export class Ingredient {
     name: string;
 
     @Column()
+    image: string;
+
+    @Column()
     unit: string;
 
     @Column()

@@ -17,4 +17,9 @@ export class IngredientController {
     create(@Body() ingredientCredentialsDto: IngredientCredentialsDto): Promise<ResponseObject> {
         return this.ingredientService.addNewIngredient(ingredientCredentialsDto);
     }
+
+    @Delete('/:id')
+    delete(@Param('id') id: string): Promise<ResponseObject> {
+        return this.ingredientService.deleteIngredient(id);
+    }
 }

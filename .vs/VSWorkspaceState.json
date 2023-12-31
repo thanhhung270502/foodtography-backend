@@ -2,13 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\auth",
     "\\src\\auth\\dto",
     "\\src\\ingredient",
     "\\src\\recipe",
-    "\\src\\recipe\\dto",
-    "\\src\\response"
+    "\\src\\recipe\\dto"
   ],
-  "SelectedNode": "\\src\\app.module.ts",
+  "SelectedNode": "\\vercel.json",
   "PreviewInSolutionExplorer": false
 }
