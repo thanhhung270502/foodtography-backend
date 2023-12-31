@@ -12,6 +12,12 @@ export class Ingredient {
     image: string;
 
     @Column()
+    description: string;
+
+    @Column()
+    cookingTips: string;
+
+    @Column()
     unit: string;
 
     @Column()

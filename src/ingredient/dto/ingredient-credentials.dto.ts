@@ -9,4 +9,10 @@ export class IngredientCredentialsDto {
 
     @IsString()
     image: string;
+
+    @IsString()
+    description: string;
+
+    @IsString()
+    cookingTips: string;
 }

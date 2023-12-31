@@ -33,6 +33,8 @@ export class IngredientService {
             created_at: new Date(),
             updated_at: new Date(),
             image: ingredientCredentialsDto.image,
+            description: ingredientCredentialsDto.description,
+            cookingTips: ingredientCredentialsDto.cookingTips,
         });
 
         try {

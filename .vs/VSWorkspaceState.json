@@ -5,6 +5,6 @@
     "\\src\\ingredient",
     "\\src\\ingredient\\dto"
   ],
-  "SelectedNode": "\\src\\ingredient\\ingredient.controller.ts",
+  "SelectedNode": "\\src\\ingredient\\dto\\ingredient-credentials.dto.ts",
   "PreviewInSolutionExplorer": false
 }
