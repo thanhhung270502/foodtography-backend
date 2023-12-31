@@ -7,6 +7,6 @@ export class IngredientCredentialsDto {
     @IsString()
     unit: string;
 
-    @IsString()
-    image: string;
+    //@IsString()
+    //image: string;
 }

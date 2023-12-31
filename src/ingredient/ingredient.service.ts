@@ -44,18 +44,18 @@ export class IngredientService {
         }
     }
 
-    async deleteIngredient(ingredient_id: string): Promise<ResponseObject> {
-        const ingredient = await this.ingredientsRepository.findOne({
-            where: {
-                id: ingredient_id,
-            },
-        });
+    //async deleteIngredient(ingredient_id: string): Promise<ResponseObject> {
+    //    const ingredient = await this.ingredientsRepository.findOne({
+    //        where: {
+    //            id: ingredient_id,
+    //        },
+    //    });
 
-        if (!ingredient) {
-            return new ResponseObject(404, `Recipe with id ${ingredient_id} not found`, {});
-        }
+    //    if (!ingredient) {
+    //        return new ResponseObject(404, `Recipe with id ${ingredient_id} not found`, {});
+    //    }
 
-        await this.ingredientsRepository.delete({ id: ingredient_id });
-        return new ResponseObject(200, 'Delete ingredient successfully', {});
-    }
+    //    await this.ingredientsRepository.delete({ id: ingredient_id });
+    //    return new ResponseObject(200, 'Delete ingredient successfully', {});
+    //}
 }

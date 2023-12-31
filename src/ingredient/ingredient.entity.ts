@@ -8,8 +8,8 @@ export class Ingredient {
     @Column()
     name: string;
 
-    @Column()
-    image: string;
+    //@Column()
+    //image: string;
 
     @Column()
     unit: string;
