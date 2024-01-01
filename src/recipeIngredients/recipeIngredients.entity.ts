@@ -1,14 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('recipe_ingredients')
 export class RecipeIngredients {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column('uuid')
+    @PrimaryColumn('uuid')
     recipeId: string;
 
-    @Column('uuid')
+    @PrimaryColumn('uuid')
     ingredientId: string;
 
     @Column()
