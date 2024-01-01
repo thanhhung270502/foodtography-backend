@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { User } from './user.entity';
 import { ResponseObject } from '../response/responseObject';
+import { ChangePasswordCredentialsDto } from './dto/changePassword-credentials.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -16,6 +17,11 @@ export class AuthController {
     @Post('/login')
     login(@Body() userInfo: User): Promise<ResponseObject> {
         return this.authService.login(userInfo);
+    }
+
+    @Put('/:id/changePassword')
+    updatePassword(@Param('id') id: string, @Body() body: ChangePasswordCredentialsDto): Promise<ResponseObject> {
+        return this.authService.changePassword(id, body);
     }
 
     @Put('/:id')

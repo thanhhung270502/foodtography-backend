@@ -14,6 +14,7 @@ import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
 import { ResponseObject } from '../response/responseObject';
 import { Logger } from '@nestjs/common';
+import { ChangePasswordCredentialsDto } from './dto/changePassword-credentials.dto';
 
 @Injectable()
 export class AuthService {
@@ -149,5 +150,31 @@ export class AuthService {
 
         await this.usersRepository.delete({ id: user_id });
         return new ResponseObject(200, 'Delete user successfully', {});
+    }
+
+    async changePassword(user_id: string, body: ChangePasswordCredentialsDto): Promise<ResponseObject> {
+        const { password } = body;
+        const user = await this.usersRepository.findOne({
+            where: {
+                id: user_id,
+            },
+        });
+
+        if (!user) {
+            return new ResponseObject(404, `User with id ${user_id} not found`, {});
+        }
+
+        // hash
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const newUser = await this.usersRepository.update(
+            { id: user_id },
+            {
+                password: hashedPassword,
+            },
+        );
+
+        return new ResponseObject(200, 'Update user successfully', newUser);
     }
 }
