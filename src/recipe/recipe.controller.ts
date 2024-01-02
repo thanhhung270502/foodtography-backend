@@ -38,14 +38,4 @@ export class RecipeController {
     getByAuthorId(@Param('authorId') authorId: string): Promise<Recipe[]> {
         return this.recipeService.getByAuthorId(authorId);
     }
-
-    // @Put('/:id/share')
-    // updateOfUser(
-    //     @Param('id') id: string,
-    //     @Query('status') status: string,
-    //     @Query('offset') offset: number,
-    //     @Query('itemToUpdate') itemToUpdate: ItemToUpdate,
-    // ): Promise<ResponseObject> {
-    //     return this.recipeService.updateOfUser(id, status, offset, itemToUpdate);
-    // }
 }
