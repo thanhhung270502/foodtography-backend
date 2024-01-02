@@ -156,4 +156,13 @@ export class RecipeService {
 
         return new ResponseObject(200, 'Update recipe successfully', newRecipe);
     }
+
+    async getByAuthorId(author_id: string): Promise<Recipe[]> {
+        const recipes = await this.recipesRepository.find({
+            where: {
+                authorId: author_id,
+            },
+        });
+        return recipes;
+    }
 }

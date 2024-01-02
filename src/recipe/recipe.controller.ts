@@ -34,6 +34,11 @@ export class RecipeController {
         return this.recipeService.delete(id);
     }
 
+    @Get('/getByAuthorId/:authorId')
+    getByAuthorId(@Param('authorId') authorId: string): Promise<Recipe[]> {
+        return this.recipeService.getByAuthorId(authorId);
+    }
+
     // @Put('/:id/share')
     // updateOfUser(
     //     @Param('id') id: string,
