@@ -1,5 +1,6 @@
+import { User } from 'src/auth/user.entity';
 import { Recipe } from 'src/recipe/recipe.entity';
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Ingredient {
@@ -21,6 +22,9 @@ export class Ingredient {
     @Column()
     unit: string;
 
+    @Column('uuid')
+    authorId: string;
+
     @Column()
     created_at: Date;
 
@@ -29,4 +33,8 @@ export class Ingredient {
 
     @ManyToMany(() => Recipe, (recipe) => recipe.ingredients)
     recipes: Recipe[];
+
+    @ManyToOne(() => User, (user) => user.recipes)
+    @JoinColumn({ name: 'authorId' })
+    user: User;
 }

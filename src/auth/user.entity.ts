@@ -1,6 +1,7 @@
+import { Ingredient } from 'src/ingredient/ingredient.entity';
 import { Meal } from 'src/meal/meal.entity';
 import { Recipe } from 'src/recipe/recipe.entity';
-import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, JoinTable, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -33,4 +34,7 @@ export class User {
 
     @OneToMany(() => Meal, (meal) => meal.user)
     meals: Meal[];
+
+    @OneToMany(() => Ingredient, (ingredient) => ingredient.user)
+    ingredients: Ingredient[];
 }

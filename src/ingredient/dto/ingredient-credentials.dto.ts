@@ -15,4 +15,7 @@ export class IngredientCredentialsDto {
 
     @IsString()
     cookingTips: string;
+
+    @IsString()
+    authorId: string;
 }

@@ -30,11 +30,12 @@ export class IngredientService {
         const ingredient = this.ingredientsRepository.create({
             name: ingredientCredentialsDto.name,
             unit: ingredientCredentialsDto.unit,
-            created_at: new Date(),
-            updated_at: new Date(),
             image: ingredientCredentialsDto.image,
             description: ingredientCredentialsDto.description,
             cookingTips: ingredientCredentialsDto.cookingTips,
+            authorId: ingredientCredentialsDto.authorId,
+            created_at: new Date(),
+            updated_at: new Date(),
         });
 
         try {
@@ -59,5 +60,14 @@ export class IngredientService {
 
         await this.ingredientsRepository.delete({ id: ingredient_id });
         return new ResponseObject(200, 'Delete ingredient successfully', {});
+    }
+
+    async getByAuthorId(author_id: string): Promise<Ingredient[]> {
+        const ingredients = await this.ingredientsRepository.find({
+            where: {
+                authorId: author_id,
+            },
+        });
+        return ingredients;
     }
 }
