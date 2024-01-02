@@ -29,6 +29,12 @@ export class RecipeService {
         const { name, image, instructions, authorNote, isPublic, authorId, ingredients, quantities } =
             recipeCredentialsDto;
 
+        if (ingredients.length !== quantities.length) {
+            return new ResponseObject(400, 'Create recipe unsuccessfully', {});
+        }
+
+        // for (let i = 0; i < )/
+
         const recipe = this.recipesRepository.create({
             name,
             image,
