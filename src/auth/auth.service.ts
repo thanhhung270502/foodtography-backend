@@ -153,7 +153,8 @@ export class AuthService {
     }
 
     async changePassword(user_id: string, body: ChangePasswordCredentialsDto): Promise<ResponseObject> {
-        const { password } = body;
+        const { oldPassword, password } = body;
+
         const user = await this.usersRepository.findOne({
             where: {
                 id: user_id,
@@ -162,19 +163,21 @@ export class AuthService {
 
         if (!user) {
             return new ResponseObject(404, `User with id ${user_id} not found`, {});
+        } else if (user && (await bcrypt.compare(oldPassword, user.password))) {
+            // hash
+            const salt = await bcrypt.genSalt();
+            const hashedPassword = await bcrypt.hash(password, salt);
+
+            const newUser = await this.usersRepository.update(
+                { id: user_id },
+                {
+                    password: hashedPassword,
+                },
+            );
+            return new ResponseObject(200, 'Change Password successfully', newUser);
+        } else {
+            // throw new UnauthorizedException('Please check your login credentials');
+            return new ResponseObject(401, 'This oldPassword is wrong', {});
         }
-
-        // hash
-        const salt = await bcrypt.genSalt();
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        const newUser = await this.usersRepository.update(
-            { id: user_id },
-            {
-                password: hashedPassword,
-            },
-        );
-
-        return new ResponseObject(200, 'Update user successfully', newUser);
     }
 }

@@ -19,8 +19,8 @@ export class AuthController {
         return this.authService.login(userInfo);
     }
 
-    @Put('/:id/changePassword')
-    updatePassword(@Param('id') id: string, @Body() body: ChangePasswordCredentialsDto): Promise<ResponseObject> {
+    @Post('/:id/changePassword')
+    changePassword(@Param('id') id: string, @Body() body: ChangePasswordCredentialsDto): Promise<ResponseObject> {
         return this.authService.changePassword(id, body);
     }
 
