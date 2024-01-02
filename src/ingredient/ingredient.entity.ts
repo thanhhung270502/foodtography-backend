@@ -22,9 +22,6 @@ export class Ingredient {
     @Column()
     unit: string;
 
-    @Column('uuid')
-    authorId: string;
-
     @Column()
     created_at: Date;
 
@@ -33,8 +30,4 @@ export class Ingredient {
 
     @ManyToMany(() => Recipe, (recipe) => recipe.ingredients)
     recipes: Recipe[];
-
-    @ManyToOne(() => User, (user) => user.recipes)
-    @JoinColumn({ name: 'authorId' })
-    user: User;
 }

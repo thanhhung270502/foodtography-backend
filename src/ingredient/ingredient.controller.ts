@@ -22,9 +22,4 @@ export class IngredientController {
     delete(@Param('id') id: string): Promise<ResponseObject> {
         return this.ingredientService.deleteIngredient(id);
     }
-
-    @Get('/getByAuthorId/:authorId')
-    getByAuthorId(@Param('authorId') authorId: string): Promise<Ingredient[]> {
-        return this.ingredientService.getByAuthorId(authorId);
-    }
 }

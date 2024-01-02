@@ -34,7 +34,4 @@ export class User {
 
     @OneToMany(() => Meal, (meal) => meal.user)
     meals: Meal[];
-
-    @OneToMany(() => Ingredient, (ingredient) => ingredient.user)
-    ingredients: Ingredient[];
 }
