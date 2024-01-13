@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src",
+    "\\src\\recipe\\dto"
   ],
-  "SelectedNode": "\\src\\app.module.ts",
+  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }
