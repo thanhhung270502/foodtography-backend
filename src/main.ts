@@ -9,7 +9,7 @@ async function bootstrap() {
     app.useGlobalPipes(new ValidationPipe());
     process.env.TZ = 'ETC/Universal';
     app.enableCors();
-    const swaggerSpecJson = JSON.parse(fs.readFileSync('./swagger-spec.json', 'utf-8'));
+    const swaggerSpecJson = JSON.parse(fs.readFileSync('../swagger-spec.json', 'utf-8'));
     const options = new DocumentBuilder().setTitle('Title').setDescription('description').setVersion('1.0').build();
     const document = SwaggerModule.createDocument(app, options, {
         include: swaggerSpecJson,
