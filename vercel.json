@@ -6,10 +6,14 @@
             "use": "@vercel/node"
         }
     ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "src/main.ts"
-        }
-    ]
+  "routes": [
+    {
+      "src": "/api/swagger-spec.json",
+      "dest": "/swagger-spec.json"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "src/main.ts"
+    }
+  ]
 }
