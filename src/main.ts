@@ -11,10 +11,10 @@ async function bootstrap() {
     app.enableCors();
     const swaggerSpecJson = JSON.parse(fs.readFileSync('../swagger-spec.json', 'utf-8'));
     const options = new DocumentBuilder().setTitle('Title').setDescription('description').setVersion('1.0').build();
-    const document = SwaggerModule.createDocument(app, options, {
-        include: swaggerSpecJson,
-    });
-    //const document = SwaggerModule.createDocument(app, options);
+    //const document = SwaggerModule.createDocument(app, options, {
+    //    include: swaggerSpecJson,
+    //});
+    const document = SwaggerModule.createDocument(app, options);
 
     fs.writeFileSync('/tmp/swagger-spec.json', JSON.stringify(document));
     SwaggerModule.setup('api', app, document);
