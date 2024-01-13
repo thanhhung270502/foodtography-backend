@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src"
   ],
-  "SelectedNode": "\\vercel.json",
+  "SelectedNode": "\\.gitignore",
   "PreviewInSolutionExplorer": false
 }
