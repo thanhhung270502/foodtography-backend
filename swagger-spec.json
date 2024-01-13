@@ -1,107 +1,662 @@
+//{
+//    "openapi": "3.0.0",
+//    "paths": {
+//        "/auth": {
+//            "post": {
+//                "operationId": "AuthController_signUp",
+//                "parameters": [],
+//                "requestBody": {
+//                    "required": true,
+//                    "content": {
+//                        "application/json": { "schema": { "$ref": "#/components/schemas/AuthCredentialsDto" } }
+//                    }
+//                },
+//                "responses": { "201": { "description": "" } }
+//            },
+//            "get": {
+//                "operationId": "AuthController_getAllUsers",
+//                "parameters": [],
+//                "responses": { "200": { "description": "" } }
+//            }
+//        },
+//        "/auth/signin": {
+//            "post": {
+//                "operationId": "AuthController_signIn",
+//                "parameters": [],
+//                "requestBody": {
+//                    "required": true,
+//                    "content": {
+//                        "application/json": { "schema": { "$ref": "#/components/schemas/AuthCredentialsDto" } }
+//                    }
+//                },
+//                "responses": { "201": { "description": "" } }
+//            }
+//        },
+//        "/auth/{id}": {
+//            "put": {
+//                "operationId": "AuthController_update",
+//                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+//                "requestBody": {
+//                    "required": true,
+//                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } }
+//                },
+//                "responses": { "200": { "description": "" } }
+//            },
+//            "get": {
+//                "operationId": "AuthController_getUserByID",
+//                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+//                "responses": { "200": { "description": "" } }
+//            },
+//            "delete": {
+//                "operationId": "AuthController_delete",
+//                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+//                "responses": { "200": { "description": "" } }
+//            }
+//        },
+//        "/recipes": {
+//            "get": {
+//                "operationId": "RecipeController_getAllRecipes",
+//                "parameters": [],
+//                "responses": { "200": { "description": "" } }
+//            },
+//            "post": {
+//                "operationId": "RecipeController_addRecipe",
+//                "parameters": [],
+//                "requestBody": {
+//                    "required": true,
+//                    "content": {
+//                        "application/json": { "schema": { "$ref": "#/components/schemas/RecipeCredentialsDto" } }
+//                    }
+//                },
+//                "responses": { "201": { "description": "" } }
+//            }
+//        },
+//        "/recipes/{id}": {
+//            "get": {
+//                "operationId": "RecipeController_getRecipeByID",
+//                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+//                "responses": { "200": { "description": "" } }
+//            },
+//            "put": {
+//                "operationId": "RecipeController_update",
+//                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+//                "requestBody": {
+//                    "required": true,
+//                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Recipe" } } }
+//                },
+//                "responses": { "200": { "description": "" } }
+//            },
+//            "delete": {
+//                "operationId": "RecipeController_delete",
+//                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+//                "responses": { "200": { "description": "" } }
+//            }
+//        }
+//    },
+//    "info": { "title": "Title", "description": "description", "version": "1.0", "contact": {} },
+//    "tags": [],
+//    "servers": [],
+//    "components": {
+//        "schemas": {
+//            "AuthCredentialsDto": { "type": "object", "properties": {} },
+//            "User": { "type": "object", "properties": {} },
+//            "RecipeCredentialsDto": { "type": "object", "properties": {} },
+//            "Recipe": { "type": "object", "properties": {} }
+//        }
+//    }
+//}
+
 {
-    "openapi": "3.0.0",
-    "paths": {
-        "/auth": {
-            "post": {
-                "operationId": "AuthController_signUp",
-                "parameters": [],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": { "schema": { "$ref": "#/components/schemas/AuthCredentialsDto" } }
-                    }
-                },
-                "responses": { "201": { "description": "" } }
-            },
-            "get": {
-                "operationId": "AuthController_getAllUsers",
-                "parameters": [],
-                "responses": { "200": { "description": "" } }
+  "openapi": "3.0.0",
+  "paths": {
+    "/auth": {
+      "post": {
+        "operationId": "AuthController_signUp",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthCredentialsDto"
+              }
             }
+          }
         },
-        "/auth/signin": {
-            "post": {
-                "operationId": "AuthController_signIn",
-                "parameters": [],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": { "schema": { "$ref": "#/components/schemas/AuthCredentialsDto" } }
-                    }
-                },
-                "responses": { "201": { "description": "" } }
-            }
-        },
-        "/auth/{id}": {
-            "put": {
-                "operationId": "AuthController_update",
-                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
-                "requestBody": {
-                    "required": true,
-                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } }
-                },
-                "responses": { "200": { "description": "" } }
-            },
-            "get": {
-                "operationId": "AuthController_getUserByID",
-                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
-                "responses": { "200": { "description": "" } }
-            },
-            "delete": {
-                "operationId": "AuthController_delete",
-                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
-                "responses": { "200": { "description": "" } }
-            }
-        },
-        "/recipes": {
-            "get": {
-                "operationId": "RecipeController_getAllRecipes",
-                "parameters": [],
-                "responses": { "200": { "description": "" } }
-            },
-            "post": {
-                "operationId": "RecipeController_addRecipe",
-                "parameters": [],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": { "schema": { "$ref": "#/components/schemas/RecipeCredentialsDto" } }
-                    }
-                },
-                "responses": { "201": { "description": "" } }
-            }
-        },
-        "/recipes/{id}": {
-            "get": {
-                "operationId": "RecipeController_getRecipeByID",
-                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
-                "responses": { "200": { "description": "" } }
-            },
-            "put": {
-                "operationId": "RecipeController_update",
-                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
-                "requestBody": {
-                    "required": true,
-                    "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Recipe" } } }
-                },
-                "responses": { "200": { "description": "" } }
-            },
-            "delete": {
-                "operationId": "RecipeController_delete",
-                "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
-                "responses": { "200": { "description": "" } }
-            }
+        "responses": {
+          "201": {
+            "description": ""
+          }
         }
+      },
+      "get": {
+        "operationId": "AuthController_getAllUsers",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
     },
-    "info": { "title": "Title", "description": "description", "version": "1.0", "contact": {} },
-    "tags": [],
-    "servers": [],
-    "components": {
-        "schemas": {
-            "AuthCredentialsDto": { "type": "object", "properties": {} },
-            "User": { "type": "object", "properties": {} },
-            "RecipeCredentialsDto": { "type": "object", "properties": {} },
-            "Recipe": { "type": "object", "properties": {} }
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
         }
+      }
+    },
+    "/auth/{id}/changePassword": {
+      "post": {
+        "operationId": "AuthController_changePassword",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/{id}": {
+      "put": {
+        "operationId": "AuthController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "operationId": "AuthController_getUserByID",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AuthController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/meals/{userId}/{time}": {
+      "get": {
+        "operationId": "MealController_getAllMealsByWeek",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "time",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/meals": {
+      "get": {
+        "operationId": "MealController_index",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "operationId": "MealController_create",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MealCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/meals/createPlanning": {
+      "post": {
+        "operationId": "MealController_createAllWeek",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMealPlanningCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/recipes": {
+      "get": {
+        "operationId": "RecipeController_getAllRecipes",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "operationId": "RecipeController_addRecipe",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecipeCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/recipes/{id}": {
+      "get": {
+        "operationId": "RecipeController_getRecipeByID",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "operationId": "RecipeController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Recipe"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RecipeController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/recipes/getByAuthorId/{authorId}": {
+      "get": {
+        "operationId": "RecipeController_getByAuthorId",
+        "parameters": [
+          {
+            "name": "authorId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/meal-recipes": {
+      "get": {
+        "operationId": "MealRecipesController_index",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "operationId": "MealRecipesController_create",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MealRecipesCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MealRecipesController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/ingredients": {
+      "get": {
+        "operationId": "IngredientController_index",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "operationId": "IngredientController_create",
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IngredientCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/ingredients/{id}": {
+      "delete": {
+        "operationId": "IngredientController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/recipe-ingredients": {
+      "get": {
+        "operationId": "RecipeIngredientsController_index",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
     }
+  },
+  "info": {
+    "title": "Title",
+    "description": "description",
+    "version": "1.0",
+    "contact": {
+
+    }
+  },
+  "tags": [
+
+  ],
+  "servers": [
+
+  ],
+  "components": {
+    "schemas": {
+      "AuthCredentialsDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "ChangePasswordCredentialsDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "MealCredentialsDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "CreateMealPlanningCredentialsDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "RecipeCredentialsDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "Recipe": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "MealRecipesCredentialsDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "IngredientCredentialsDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      }
+    }
+  }
 }
